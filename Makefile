@@ -33,11 +33,11 @@ tar: ${PROG}-${VERSION}.tar.gz
 
 srpm: tar
 	${MOCK} --no-cleanup-after -r ${ARCH} --buildsrpm --define='package_version ${VERSION}' --sources=${PROG}.tar.gz \
-        --spec=${SPEC} --resultdir=${RESULTDIR}
+        --spec=${SPEC} --resultdir=${RESULTDIR} --plugin-option=root_cache:dir="${CACHEDIR}/%(root)s"
 
 rpm: srpm
 	${MOCK} --no-cleanup-after -r ${ARCH} --define='package_version ${VERSION}' --resultdir=${RESULTDIR} \
-	--rebuild ${RESULTDIR}/*.src.rpm
+	--plugin-option=root_cache:dir="${CACHEDIR}/%(root)s" --rebuild ${RESULTDIR}/*.src.rpm
 
 clean:
 	-${RM} ${PROG}.tar.gz
