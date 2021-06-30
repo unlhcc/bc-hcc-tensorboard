@@ -1,15 +1,30 @@
+<%-
+cores = bc_num_cores.blank? ? 1 : bc_num_cores.to_i
+mem = bc_memory.blank? ? 1 : bc_memory.to_i
+nodes = bc_num_slots.blank? ? 1 : bc_num_slots.to_i
+
+%>
+---
 batch_connect:
-  template: "basic"
-
+  template: basic
 script:
-  native: [
-            "-c", "<%= sh_cpus.blank?  ? 1 : sh_cpus.to_i %>",
-            <%- if not sh_gpus.blank? -%>
-                "-G", "<%= sh_gpus.to_i %>",
-            <%- end -%>
-            <%- if not sh_mem.blank? -%>
-                "--mem", "<%= sh_mem.to_i %>G"
-            <%- end -%>
-          ]
-  queue_name: <%= sh_partition.blank? ? "dev" : sh_partition.strip %>
-
+  # Slurm option is mem, memory is passed from the form
+  copy_environment: true
+  email: ["<%= bc_email_address.strip %>"]
+  native:
+    - "--qos"
+    - "<%= qos_type %>"
+    - "--mem"
+    - "<%= mem %>GB"
+    - "--licenses"
+    - "common"
+    - "--ntasks-per-node"
+    - "<%= cores %>"
+    - "--nodes"
+    - "<%= nodes %>"
+    - "--constraint"
+    - "<%= bc_constraint.strip %>"
+    - "--gres"
+    - "<%= bc_gres.strip %>"
+    - "--reservation"
+    - "<%= bc_reservation.strip %>"

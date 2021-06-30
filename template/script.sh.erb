@@ -5,11 +5,11 @@
 #
 
 # Load the Tensorflow module (required)
-module load <%= context.sh_tf_version %>
+module load <%= context.tf_version %>
 
-<%- unless context.sh_modules.blank? -%>
+<%- unless context.addl_modules.blank? -%>
 # Load additional modules
-module load <%= context.sh_modules %>
+module load <%= context.addl_modules %>
 <%- end -%>
 
 #
