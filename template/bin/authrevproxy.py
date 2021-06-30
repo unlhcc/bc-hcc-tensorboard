@@ -11,7 +11,7 @@
 from twisted.internet import reactor, endpoints
 from twisted.web import proxy, server
 from twisted.web.resource import Resource
-from twisted.web.error import ForbiddenResource
+from twisted.web.resource import ForbiddenResource
 
 import argparse
 import getpass
