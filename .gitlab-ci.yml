@@ -10,7 +10,8 @@ rpm-build:
   before_script:
     - mkdir -p artifacts .cache
   script:
-    - make rpm
+    - make rpm ARCH=epel-7-x86_64
+    - make rpm ARCH=epel-8-x86_64
   artifacts:
     paths:
       - artifacts/
