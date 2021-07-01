@@ -45,7 +45,7 @@ class TokenResource(Resource):
             # - cookie name depends on the ood interactive session id ($PWD)
             ood_session_id = os.path.basename(os.getcwd())
             try:
-                cookie = request.getCookie('_ood_token_' + ood_session_id)
+                cookie = request.getCookie(str('_ood_token_' + ood_session_id).encode())
 
             except:
                 cookie = None
@@ -59,10 +59,10 @@ class TokenResource(Resource):
                 ood_token = None
 
             # check that cookie matches the local token
-            if cookie == ood_token and cookie != None:
+            if cookie.decode() == ood_token and cookie != None:
                 return proxy.ReverseProxyResource(self.host,
                                                   self.port,
-                                                  '/' + path)
+                                                  b'/' + path)
 
         # no cheese for you
         request.setResponseCode(403)
