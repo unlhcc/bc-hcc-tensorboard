@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/util/opt/anaconda/deployed-conda-envs/packages/twisted/envs/twisted-21.2.0/bin/python
 
 # provides a reverse proxy that only allows requests coming from the same
 # user it's running as
