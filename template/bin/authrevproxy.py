@@ -15,7 +15,7 @@ from twisted.web.resource import ForbiddenResource
 
 import argparse
 import getpass
-import sys, os
+import sys, os, pwd
 
 
 #
@@ -39,7 +39,7 @@ class TokenResource(Resource):
             user = None
 
         # check if the request comes from the right user (note: can be forged)
-        if user == getpass.getuser():
+        if user == pwd.getpwuid(os.getuid())[0]:
 
             # get ood token cookie
             # - cookie name depends on the ood interactive session id ($PWD)
