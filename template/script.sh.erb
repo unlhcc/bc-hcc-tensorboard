@@ -1,4 +1,16 @@
-#!/usr/bin/env bash
+#!/bin/bash
+
+<%
+ # Set our working directory.
+ tb_logdir = Pathname.new(context.tb_logdir)
+
+ # Ensure that code-server always starts up in either a user defined directory or the home directory.
+ if ! tb_logdir.exist?
+    tb_logdir = Pathname.new(ENV['HOME'])
+ elsif tb_logdir.file?
+    tb_logdir = tb_logdir.parent
+ end
+%>
 
 #
 # Load modules
@@ -22,6 +34,6 @@ cd "${HOME}"
 # Launch the Tensorboard Server
 # start on 127.0.0.1, since TensorBoard doesn't support any kind of authentication
 # and we rely on authrevproxy to only allow authentified requests
-tensorboard --logdir=<%= context.tb_logdir %> <%= context.tb_extra_args %> \
+tensorboard --logdir="<%= tb_logdir.to_s %>" <%= context.tb_extra_args %> \
             --host=127.0.0.1 \
             --port="${app_port}"

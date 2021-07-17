@@ -22,8 +22,11 @@ attributes:
         Full list for [Crane](https://hcc.unl.edu/docs/applications/modules/available_software_for_crane/) or [Rhino](https://hcc.unl.edu/docs/applications/modules/available_software_for_rhino/)</small>
   tb_logdir:
     label: "Tensorboard logdir"
+    data-filepicker: true
+    data-target-file-type: dirs  # Valid values are: files, dirs, or both
+    readonly: false
     required: true
-    help: "The directory that contains data to visualize."
+    help: "Select the directory that contains data to visualize; defaults to $HOME."
   tb_extra_args:
     label: "Additional TensorBoard arguments (optional)"
   tf_version:
