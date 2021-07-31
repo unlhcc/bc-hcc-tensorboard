@@ -15,7 +15,6 @@ License:  MIT
 URL:      https://git.unl.edu/hcc/bc_hcc_desktop
 Source0:  bc-hcc-tensorboard.tar.gz
 
-BuildArch: noarch
 Requires: ondemand
 
 # Disable automatic dependencies as it causes issues with bundled gems and
