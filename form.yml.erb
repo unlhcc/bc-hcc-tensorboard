@@ -1,16 +1,10 @@
 <%-
   # get tensorflow modules
-  m_cmd = "bash -il -c 'source /util/opt/lmod/lmod/init/profile && module use /util/opt/hcc-modules/Common && module -t avail tensorflow |& grep tensorflow' 2>/dev/null"
   begin
-    output, status = Open3.capture2e(m_cmd)
-    if status.success?
-      _list_tf_versions = output.split("\n").map(&:strip).reject(&:blank?).sort
-    else
-      raise output
-    end
+    _list_tf_versions = File.read("/util/opt/modulefiles/tensorflow_module_list.txt").split("\n").map(&:strip).reject(&:blank?).sort
   rescue => e
     _list_tf_versions = []
-    m_error = e.message.strip
+    m_error = "Error fetching tensorflow modules"
   end
 -%>
 ---
