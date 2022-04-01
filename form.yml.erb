@@ -51,9 +51,9 @@ attributes:
   bc_num_cores:
     widget: "number_field"
     label: "Number of cores"
-    help: "Number of cores requested on a node (min 1, max 8)"
+    help: "Number of cores requested on a node (min 1, max 16)"
     min: 1
-    max: 8
+    max: 16
     step: 1
     value: "1"
     id: "num_cores"
@@ -68,9 +68,9 @@ attributes:
   bc_memory:
     widget: "number_field"
     label: "Requested RAM in GBs"
-    help: "Maximum memory requested for Tensorboard server (min 1GB, max 16GBs)"
+    help: "Maximum memory requested for Tensorboard server (min 1GB, max 62GBs)"
     min: 1
-    max: 16
+    max: 62
     step: 1
     value: "1"
     id: "memory"
